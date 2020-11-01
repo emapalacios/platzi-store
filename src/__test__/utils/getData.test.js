@@ -1,0 +1,19 @@
+import getData from '../../utils/getData';
+import getDate from '../../utils/getData';
+
+describe('Fetch API', () => {
+    beforeEach(() => {
+        fetch.resetMocks();
+    });
+
+    test('Llamar una API y retornar datos', () => {
+        fetch.mockResponseOnce(JSON.stringify({ data: '12345' }));
+
+        getData('https://google.com')
+            .then( (response) => {
+                expect(response.data).toEquial('12345')
+            });
+
+            expect(fetch.mock.calls[0][0]).toEqual('https://google.com');
+    })
+})
